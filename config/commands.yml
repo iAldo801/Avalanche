@@ -1,0 +1,24 @@
+roles:
+  staff: "1086412212224147578"
+
+ban: 
+  enabled: true
+mute:
+  enabled: false
+unmute:
+  enabled: true
+kick:
+  enabled: true
+nuke:
+  enabled: true
+tempban:
+  enabled: true
+unban:
+  enabled: true
+
+
+
+disabled:
+  title: "⚠️ Warning Notice ⚠️"
+  description: "> This command is disabled please enable it on the config!\n *This embed will be deleted in 3 seconds.*"
+  color: "Yellow"
