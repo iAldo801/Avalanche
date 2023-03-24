@@ -4,6 +4,7 @@ const fs = require("fs")
 const yaml = require("js-yaml")
 const embeds = yaml.load(fs.readFileSync("./config/embeds.yml", "utf8"))
 const commands = yaml.load(fs.readFileSync("./config/commands.yml", "utf8"))
+const userDataSchema = require('../../schemas/userDataSchema');
 
 
 module.exports = {
@@ -54,50 +55,67 @@ module.exports = {
                 .setTimestamp();
 
             return interaction.reply({ embeds: [embed] }).then(() => {
-                
+
                 setTimeout(() => {
                     interaction.deleteReply().catch(console.error);
                 }, 5000);
             }).catch(console.error);
         }
 
-        const { guild, member, options } = interaction;
+        try {
+            const { guild, member, options } = interaction;
 
-        const user = options.getUser('user') || interaction.user
-        const reason = options.getString('reason') || "No reason provided."
-        // const data = await historySchema.findOne({ guildID: guild.id })
+            const user = options.getUser('user') || interaction.user
+            const reason = options.getString('reason') || "No reason provided."
+            const date = new Date().toLocaleString()
 
-        if (!interaction.member.permissions.has(PermissionsBitField.Flags.BanMembers)) return interaction.reply({ content: 'You do not have permission to ban members!', ephemeral: true });
+            if (!interaction.member.permissions.has(PermissionsBitField.Flags.BanMembers)) return interaction.reply({ content: 'You do not have permission to ban members!', ephemeral: true });
 
-        if (user.id === interaction.user.id) return interaction.reply({ content: 'You cannot ban yourself!', ephemeral: true });
-        if (user.id === client.user.id) return interaction.reply({ content: 'You cannot ban me!', ephemeral: true });
-        if (user.id === interaction.guild.ownerId) return interaction.reply({ content: 'You cannot ban the server owner!', ephemeral: true });
+            if (user.id === interaction.user.id) return interaction.reply({ content: 'You cannot ban yourself!', ephemeral: true });
+            if (user.id === client.user.id) return interaction.reply({ content: 'You cannot ban me!', ephemeral: true });
+            if (user.id === interaction.guild.ownerId) return interaction.reply({ content: 'You cannot ban the server owner!', ephemeral: true });
 
-        const amount = options.getString('delete_messages') || '0';
-        const membera = await interaction.guild.members.fetch(user.id).catch(console.error);
-        await membera.ban({ days: amount, reason: reason }).catch(err => {
-            if (err === 50013) return console.log({ content: 'I do not have permission to ban members!', ephemeral: true });
-        })
+            const amount = options.getString('delete_messages') || '0';
+            const membera = await interaction.guild.members.fetch(user.id).catch(console.error);
+            await membera.ban({ days: amount, reason: reason }).catch(err => {
+                if (err === 50013) return console.log({ content: 'I do not have permission to ban members!', ephemeral: true });
+            })
+           const data = await userDataSchema.findOne({userID: user.id})
+           if(data){
+            const sanctions = data.sanctions
+            sanctions.push({
+                "reason": reason,
+                "type": "BAN",
+                "staff": interaction.user.username,
+                "date": date
+            })
+            data.save()
+           } else {
+            new userDataSchema({
+                guildID: guild.id,
+                userID: user.id,
+                sanctions: [
+                    {
+                        "reason": reason,
+                        "type": "BAN",
+                        "staff": interaction.user.username,
+                        "date": date
+                    }
+                ]
+            }).save()
+           }
 
-        // const bans_ID = banID(100000, 999999)
-        // const data = await historySchema.findOneAndUpdate({ guildID: guild.id }, { guildID: guild.id, userID: user.id }, { upsert: true })
-        // // await data.bansID.push(bans_ID)
 
-        // const newDataBansSave = new historySchema({
-        //     guildID: interaction.guild.id,
-        //     bansID: [bans_ID]
-        // })
-        // await newDataBansSave.bansID.push(bans_ID)
-        // await newDataBansSave.save()
 
-        const embed = new Discord.EmbedBuilder()
-            .setTitle(embeds.ban.title)
-            .setDescription(embeds.ban.description.replace('{user}', user.username).replace('{reason}', reason).replace('{moderator}', interaction.user.username).replace('{date}', new Date().toLocaleString()))
-            .setColor(embeds.ban.color)
-            .setTimestamp();
+            const embed = new Discord.EmbedBuilder()
+                .setTitle(embeds.ban.title)
+                .setDescription(embeds.ban.description.replace('{user}', user.username).replace('{reason}', reason).replace('{moderator}', interaction.user.username).replace('{date}', date))
+                .setColor(embeds.ban.color)
+                .setTimestamp();
 
-        await interaction.reply({ embeds: [embed] })
+            await interaction.reply({ embeds: [embed] })
+        } catch (err) {
+            console.log(err)
+        }
     }
 }
-
-function banID(min, max) { return Math.floor(Math.random() * (max - min + 1) + min) }

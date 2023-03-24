@@ -2,6 +2,7 @@ const Discord = require('discord.js');
 const fs = require("fs")
 const yaml = require("js-yaml")
 const embeds = yaml.load(fs.readFileSync("./config/embeds.yml", "utf8"))
+const commands = yaml.load(fs.readFileSync("./config/commands.yml", "utf8"))
 
 module.exports = {
     name: 'kick',

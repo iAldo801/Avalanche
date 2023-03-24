@@ -1,5 +1,8 @@
-roles:
-  staff: "1086412212224147578"
+guildID: "1040756957931384873"
+
+###################
+#     Booleans    #
+###################
 
 ban: 
   enabled: true
@@ -15,8 +18,46 @@ tempban:
   enabled: true
 unban:
   enabled: true
+history:
+  enabled: true
+dick:
+  enabled: true
+iq:
+  enabled: true
+say:
+  enabled: true
+troll:
+  enabled: true
+  max_mentions: 10
+  message: "You cant mention that amount! The max is {max_mentions}"
+dm:
+  enabled: true
+ping:
+  enabled: true
+suggestion:
+  enabled: true
+
+###################
+#      Roles      #
+###################
+
+roles:
+  staff: "1086412212224147578"
+  muted: "1086408463267143701"
 
 
+###################
+#     Channels    #
+###################
+
+channels:
+  logs: "1086796908967764048"
+  suggestions: "1086797308194201680"
+  welcome: "1086810290127130715"
+  
+###################
+#     Embeds      #
+###################
 
 disabled:
   title: "⚠️ Warning Notice ⚠️"

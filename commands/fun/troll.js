@@ -1,4 +1,7 @@
 const Discord = require("discord.js")
+const fs = require("fs")
+const yaml = require("js-yaml")
+const commands = yaml.load(fs.readFileSync("./config/commands.yml", "utf8"))
 
 module.exports = {
 
@@ -22,10 +25,26 @@ module.exports = {
 
     run: async (client, interaction) => {
 
+        if (!commands.troll.enabled) {
+            const embed = new Discord.EmbedBuilder()
+                .setTitle(commands.disabled.title)
+                .setDescription(commands.disabled.description)
+                .setColor(commands.disabled.color)
+                .setTimestamp();
+
+            return interaction.reply({ embeds: [embed] }).then(() => {
+
+                setTimeout(() => {
+                    interaction.deleteReply().catch(console.error);
+                }, 5000);
+            }).catch(console.error);
+        }
+
         const user = interaction.options.getUser("user")
         const times = interaction.options.getNumber("times")
 
-        if (times > 999) return interaction.reply({ content: "You can only troll someone 10 times!", ephemeral: true })
+        if (times > eval(commands.troll.max_mentions)) 
+        return interaction.reply({ content: "You can only troll someone 10 times!", ephemeral: true })
 
         Array(times).fill().map((_, i) => interaction.channel.send(`<@${user.id}>`))
 

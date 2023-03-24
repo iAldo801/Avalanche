@@ -7,7 +7,6 @@ unban:
   description: "> {user} has been unbanned from the server.\n\n> **Moderator:** {moderator}\n> **Date:** {date}"
   color: "Green"
 mute:
-  role: "1086408463267143701"
   title: "Mute has been successfully issued."
   description: "> {user} has been muted from the server.\n\n> **Reason:** {reason}\n> **Moderator:** {moderator}\n> **Date:** {date}"
   color: "Red"
@@ -20,9 +19,10 @@ kick:
   description: "> {user} has been kicked from the server.\n\n> **Reason:** {reason}\n> **Moderator:** {moderator}\n> **Date:** {date}"
   color: "Red"
 history: 
-  title: "User history"
-  description: "> {user}"
-  color: "Red"
+  bans:
+    title: "{user}'s sanctions"
+    description: "> Reason: {reason}\n> Moderator: {moderator}\n> Date: {date}"
+    color: "Orange"
 nuke: 
   title: "Channel has been successfully nuked."
   description: "> *{channel}* has been nuked.\n\n> **Nuked by:** {username}\n> **Date:** {date}"
@@ -31,14 +31,46 @@ serverinfo:
   title: "{servername}"
   description: "> **Owner:**\n> <@{serverowner}>\n> **Created At:** > \n{servercreateddate}\n> **Member Count:** > \n{membercount}"
   color: "Orange"
-messageupdate:
-  title: "Message has been updated."
-  description: "> Message sent by {oldMessageAuthor} in {oldMessageChannel}"
-  fields:
-    one:
-      name: "Old Message"
-      value: "> {oldMessageContent}"
-    two:
-      name: "New Message"
-      value: "> {newMessageContent}"
+dick:
+  description: "You dick size is {dicksize}cm"
   color: "Orange"
+iq:
+  description: "Your IQ is {iq}"
+  color: "Orange"
+troll:
+  max_mentions: 10
+  number_exceeded: "You can only mention {max_mentions} users at a time."
+
+########################
+#     Logs Embeds      #
+#######################
+
+message:
+  updated:
+    title: "Message has been updated."
+    description: "> Message sent by {oldMessageAuthor} in {oldMessageChannel}"
+    fields:
+      one:
+        name: "Old Message"
+        value: "> {oldMessageContent}"
+      two:
+        name: "New Message"
+        value: "> {newMessageContent}"
+    color: "Orange"
+  deleted:
+    title: "Message has been deleted."
+    description: "> Message sent by {author} in {channel}"
+    fields:
+      one:
+        name: "Message"
+        value: "> {deleted_message}"
+    color: "Orange"
+voice:
+  join:
+    title: "Member Joined Voice Channel"
+    description: "**Channel**\n> <#{channel}>\n\n**User**\n> <@{user}>\n\n**Date**\n> {time}"
+    color: "Green"
+  leave:
+    title: "Member Left Voice Channel"
+    description: "**Channel**\n> <#{channel}>\n\n**User**\n> <@{user}>\n\n**Date**\n> {time}"
+    color: "Red"

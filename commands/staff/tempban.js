@@ -52,7 +52,7 @@ module.exports = {
 
     run: async (client, interaction) => {
 
-        if (!commands.unban.enabled) {
+        if (!commands.tempban.enabled) {
             const embed = new Discord.EmbedBuilder()
                 .setTitle(commands.disabled.title)
                 .setDescription(commands.disabled.description)

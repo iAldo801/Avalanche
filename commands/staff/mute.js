@@ -45,7 +45,7 @@ module.exports = {
         const user = options.getUser('user') || interaction.user
         const target = guild.members.cache.get(user.id);
         const reason = options.getString('reason') || "No reason provided."
-        const mutedRole = guild.roles.cache.get(embeds.mute.role);
+        const mutedRole = guild.roles.cache.get(commands.roles.muted);
 
         if (!interaction.member.permissions.has(PermissionsBitField.Flags.MuteMembers)) return interaction.reply({ content: 'You do not have permission to muite members!', ephemeral: true });
 
