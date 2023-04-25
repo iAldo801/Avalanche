@@ -14,7 +14,7 @@ module.exports = {
             description: 'The channel to nuke.',
             type: 7,
             required: false
-        }
+        },
     ],
 
     run: async (client, interaction) => {
@@ -41,7 +41,6 @@ module.exports = {
             .setColor(embeds.nuke.color)
             .setTimestamp()
 
-
         channel.clone().then((ch) => {
             ch.setParent(channel.parent.id);
             ch.setPosition(channel.position);
@@ -50,9 +49,6 @@ module.exports = {
                     msg.delete().catch(console.error);
                 }, 3000);
             })
-
-
-
             channel.delete();
         });
     }

@@ -3,7 +3,6 @@ const Discord = require('discord.js');
 
 client.on("interactionCreate", async (interaction) => {
     if (interaction.isChatInputCommand()) {
-        //await interaction.deferReply({ ephemeral: false })
         const command = client.slash.get(interaction.commandName);
         if (!command) return;
         const args = [];
@@ -17,9 +16,5 @@ client.on("interactionCreate", async (interaction) => {
             } else if (option.value) args.push(option.value);
         }
         command.run(client, interaction, args)
-    } else if (interaction.isButton()) {
-        if (interaction.customId === 'accept') {
-            interaction.update({ content: 'Accepted!', components: [] });
-        }
     }
 });

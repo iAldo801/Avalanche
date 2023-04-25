@@ -5,6 +5,7 @@ const userDataSchema = new mongoose.Schema({
     userID: String,
     time: String,
     sanctions: Array,
+    warnid: String
 });
 
 module.exports = mongoose.model('userData', userDataSchema);

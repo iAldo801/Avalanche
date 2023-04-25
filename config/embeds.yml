@@ -10,6 +10,26 @@ mute:
   title: "Mute has been successfully issued."
   description: "> {user} has been muted from the server.\n\n> **Reason:** {reason}\n> **Moderator:** {moderator}\n> **Date:** {date}"
   color: "Red"
+  tempmute:
+    title: "Mute has been successfully issued."
+    description: "> {user} has been muted from the server.\n\n> **Reason:** {reason}\n> **Time:** {time_muted} \n> **Moderator:** {moderator}\n> **Date:** {date}"
+    color: "Red"
+    fields:
+      one:
+        name: "User"
+        value: "> {user}"
+      two:
+        name: "Reason"
+        value: "> {Reason}"
+      three:
+        name: "Time"
+        value: "> {time}"
+      four:
+        name: "Moderator"
+        value: "> {moderator}"
+      five:
+        name: "Date"
+        value: "> {date}"
 unmute:
   title: "Mute has been successfully removed."
   description: "> {user} has been unmuted from the server.\n\n> **Moderator:** {moderator}\n> **Date:** {date}"
@@ -20,8 +40,34 @@ kick:
   color: "Red"
 history: 
   bans:
-    title: "{user}'s sanctions"
-    description: "> Reason: {reason}\n> Moderator: {moderator}\n> Date: {date}"
+    title: "{user}'s ban sanctions"
+    fields:
+      one: 
+        name: "Staff"
+        value: "{staff}"
+      two:
+        name: "Reason"
+        value: "{reason}"
+      three:
+        name: "Date"
+        value: "{date}"
+    color: "Orange"
+  mute:
+    title: "{user}'s mute sanctions"
+    fields:
+      one: 
+        name: "Staff"
+        value: "{staff}"
+      two:
+        name: "Reason"
+        value: "{reason}"
+      three:
+        name: "Date"
+        value: "{date}"
+    color: "Orange"
+  nohistory:
+    title: "No sanctions found for {user}."
+    description: "> If you think this is an error, please contact a staff member."
     color: "Orange"
 nuke: 
   title: "Channel has been successfully nuked."
@@ -40,10 +86,15 @@ iq:
 troll:
   max_mentions: 10
   number_exceeded: "You can only mention {max_mentions} users at a time."
+role:
+  title: "Role has been successfully issued."
+  description: "> {user} has been given the role <@&{role}>."
+  color: "Orange"
+tempmute:
 
 ########################
 #     Logs Embeds      #
-#######################
+########################
 
 message:
   updated:

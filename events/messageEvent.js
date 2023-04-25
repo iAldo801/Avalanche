@@ -7,7 +7,7 @@ const embeds = yaml.load(fs.readFileSync("./config/embeds.yml", "utf8"))
 const commands = yaml.load(fs.readFileSync("./config/commands.yml", "utf8"))
 
 
-client.on('messageUpdate', async (oldMessage, newMessage) => {
+client.on('messageUpdate', async (oldMessage, newMessage, message) => {
 
     if (oldMessage.content === newMessage.content) return;
 
@@ -20,6 +20,8 @@ client.on('messageUpdate', async (oldMessage, newMessage) => {
         )
         .setColor(embeds.message.updated.color)
         .setTimestamp();
+
+        if (message.author.bot) return;
 
     client.channels.cache.get(commands.channels.logs).send({ embeds: [embed] });
 

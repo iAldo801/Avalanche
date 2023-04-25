@@ -7,7 +7,7 @@ guildID: "1040756957931384873"
 ban: 
   enabled: true
 mute:
-  enabled: false
+  enabled: true
 unmute:
   enabled: true
 kick:
@@ -36,6 +36,8 @@ ping:
   enabled: true
 suggestion:
   enabled: true
+tempmute:
+  enabled: true
 
 ###################
 #      Roles      #
@@ -62,4 +64,8 @@ channels:
 disabled:
   title: "⚠️ Warning Notice ⚠️"
   description: "> This command is disabled please enable it on the config!\n *This embed will be deleted in 3 seconds.*"
+  color: "Yellow"
+user_has_roles:
+  title: "⚠️ Warning Notice ⚠️"
+  description: "> The user you are trying to give a role to/mute already has that role!\n *This embed will be deleted in 5 seconds.*"
   color: "Yellow"

@@ -60,7 +60,7 @@ module.exports = {
                 .setTimestamp();
 
             return interaction.reply({ embeds: [embed] }).then(() => {
-                
+
                 setTimeout(() => {
                     interaction.deleteReply().catch(console.error);
                 }, 5000);

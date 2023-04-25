@@ -4,6 +4,7 @@ const fs = require("fs")
 const yaml = require("js-yaml")
 const embeds = yaml.load(fs.readFileSync("./config/embeds.yml", "utf8"))
 const commands = yaml.load(fs.readFileSync("./config/commands.yml", "utf8"))
+const userDataSchema = require('../../schemas/userDataSchema');
 
 module.exports = {
     name: 'mute',
@@ -46,6 +47,7 @@ module.exports = {
         const target = guild.members.cache.get(user.id);
         const reason = options.getString('reason') || "No reason provided."
         const mutedRole = guild.roles.cache.get(commands.roles.muted);
+        const date = new Date().toLocaleString()
 
         if (!interaction.member.permissions.has(PermissionsBitField.Flags.MuteMembers)) return interaction.reply({ content: 'You do not have permission to muite members!', ephemeral: true });
 
@@ -54,6 +56,25 @@ module.exports = {
         if (user.id === interaction.guild.ownerId) return interaction.reply({ content: 'You cannot mute the server owner!', ephemeral: true });
 
         target.roles.add(mutedRole);
+
+        await userDataSchema.findOneAndUpdate(
+            { userID: user.id },
+            {
+                $push: {
+                    sanctions: {
+                        staff: interaction.user.username,
+                        reason: reason,
+                        type: "MUTE",
+                        date: date
+                    }
+                }
+            },
+            { new: true, upsert: true }
+        )
+            .catch((error) => {
+                console.log(error);
+            });
+
 
         const embed = new Discord.EmbedBuilder()
             .setTitle(embeds.mute.title)
