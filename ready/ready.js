@@ -3,7 +3,7 @@ const fs = require('fs');
 const path = require('path');
 const chalk = require('chalk');
 const log = console.log;
-const orange = chalk.hex('FFA500')
+const aqua = chalk.hex('#33FFFE')
 const eventsPath = path.join(__dirname, '../events');
 const eventFiles = fs.readdirSync(eventsPath).filter(file => file.endsWith('.js'));
 const mongo = require('mongoose');
@@ -31,19 +31,18 @@ for (const subFolder of dirCommands) {
 }
 
 mongo.set('strictQuery', true);
-mongo.connect('mongodb://127.0.0.1:27017/campfire')
 
 client.on("ready", () => {
-    log(orange('│ 🔥 Campfire Bot ↴'))
+    log(aqua('│ 🏂 Avalanche Bot ↴'))
     log("")
-    log(chalk.green(` │ Commands Loaded ⤵`))
+    log(chalk.green(` │ 💻 Commands Loaded ⤵`))
     log('  ' + filesCommands.length + chalk.blue(` commands have been loaded from ` + dirCommands.length + ` folders`))
     log("")
-    log(chalk.green(` │ Events Loaded ⤵`))
+    log(chalk.green(` │ ✨ Events Loaded ⤵`))
     log('  ' + eventFiles.length + chalk.blue(` events have been loaded`))
     log("")
-    log(chalk.green(` │ Mongo Status ⤵`))
-    mongo.connect('mongodb://127.0.0.1:27017/campfire').then(() => {
+    log(chalk.green(` │ 🌿 Mongo Status ⤵`))
+    mongo.connect('mongodb://127.0.0.1:27017/avalanche').then(() => {
         log(chalk.yellow(`  Connection to database has been succesfully established`))
     }).catch((err) => {
         log(chalk.red(`  Connection to database has failed`))

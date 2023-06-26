@@ -12,13 +12,13 @@ module.exports = {
     run: async(client, interaction, args) => {
 
         if (!commands.dm.enabled) {
-            const embed = new Discord.EmbedBuilder()
+            const disabledCommand = new Discord.EmbedBuilder()
                 .setTitle(commands.disabled.title)
                 .setDescription(commands.disabled.description)
                 .setColor(commands.disabled.color)
                 .setTimestamp();
 
-            return interaction.reply({ embeds: [embed] }).then(() => {
+            return interaction.reply({ embeds: [disabledCommand] }).then(() => {
                 
                 setTimeout(() => {
                     interaction.deleteReply().catch(console.error);

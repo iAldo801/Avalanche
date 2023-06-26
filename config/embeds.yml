@@ -51,7 +51,7 @@ history:
       three:
         name: "Date"
         value: "{date}"
-    color: "Orange"
+    color: "Aqua"
   mute:
     title: "{user}'s mute sanctions"
     fields:
@@ -64,11 +64,11 @@ history:
       three:
         name: "Date"
         value: "{date}"
-    color: "Orange"
+    color: "Aqua"
   nohistory:
     title: "No sanctions found for {user}."
     description: "> If you think this is an error, please contact a staff member."
-    color: "Orange"
+    color: "Aqua"
 nuke: 
   title: "Channel has been successfully nuked."
   description: "> *{channel}* has been nuked.\n\n> **Nuked by:** {username}\n> **Date:** {date}"
@@ -76,20 +76,21 @@ nuke:
 serverinfo:
   title: "{servername}"
   description: "> **Owner:**\n> <@{serverowner}>\n> **Created At:** > \n{servercreateddate}\n> **Member Count:** > \n{membercount}"
-  color: "Orange"
+  color: "Aqua"
 dick:
   description: "You dick size is {dicksize}cm"
-  color: "Orange"
+  color: "Aqua"
 iq:
   description: "Your IQ is {iq}"
-  color: "Orange"
+  color: "Aqua"
 troll:
   max_mentions: 10
   number_exceeded: "You can only mention {max_mentions} users at a time."
+  color: "Red"
 role:
   title: "Role has been successfully issued."
   description: "> {user} has been given the role <@&{role}>."
-  color: "Orange"
+  color: "Aqua"
 tempmute:
 
 ########################
@@ -107,7 +108,7 @@ message:
       two:
         name: "New Message"
         value: "> {newMessageContent}"
-    color: "Orange"
+    color: "Aqua"
   deleted:
     title: "Message has been deleted."
     description: "> Message sent by {author} in {channel}"
@@ -115,7 +116,7 @@ message:
       one:
         name: "Message"
         value: "> {deleted_message}"
-    color: "Orange"
+    color: "Aqua"
 voice:
   join:
     title: "Member Joined Voice Channel"

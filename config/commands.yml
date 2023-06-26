@@ -34,8 +34,6 @@ dm:
   enabled: true
 ping:
   enabled: true
-suggestion:
-  enabled: true
 tempmute:
   enabled: true
 

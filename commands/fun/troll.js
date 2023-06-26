@@ -26,13 +26,13 @@ module.exports = {
     run: async (client, interaction) => {
 
         if (!commands.troll.enabled) {
-            const embed = new Discord.EmbedBuilder()
+            const disabledCommand = new Discord.EmbedBuilder()
                 .setTitle(commands.disabled.title)
                 .setDescription(commands.disabled.description)
                 .setColor(commands.disabled.color)
                 .setTimestamp();
 
-            return interaction.reply({ embeds: [embed] }).then(() => {
+            return interaction.reply({ embeds: [disabledCommand] }).then(() => {
 
                 setTimeout(() => {
                     interaction.deleteReply().catch(console.error);
@@ -43,11 +43,17 @@ module.exports = {
         const user = interaction.options.getUser("user")
         const times = interaction.options.getNumber("times")
 
-        if (times > eval(commands.troll.max_mentions)) 
-        return interaction.reply({ content: "You can only troll someone 10 times!", ephemeral: true })
+        if (times > eval(commands.troll.max_mentions)) {
+
+            const maxMentions = new Discord.EmbedBuilder()
+                .setTitle(commands.troll.max_mentions.replace('{max_mentions}', eval(commands.troll.max_mentions)))
+                .setColor(commands.troll.max_mentions_color)
+
+            return interaction.reply({ embeds: [maxMentions] })
+        }
 
         Array(times).fill().map((_, i) => interaction.channel.send(`<@${user.id}>`))
 
         interaction.reply({ content: "User is being trolled!", ephemeral: true })
-    } 
+    }
 }
