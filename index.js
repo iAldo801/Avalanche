@@ -8,6 +8,6 @@ module.exports = client;
   require(`./ready/ready`)
 });
 
-client.login('OTcyMzQ2NTg4MjU5MzE1NzIy.GistuK.aGGyBGfbgSOHHuSvSo1xpsKQJD_j5e_pN7H-ns');
+client.login('TOKEN');
 
 module.exports = client;
